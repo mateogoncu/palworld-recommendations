@@ -18,22 +18,26 @@ A **Palworld** guide in Spanish and English, built from the game's own data.
 - **Probabilidades reales de captura** por esfera y por vida restante.
 - **Mapa interactivo** de los dos mapas del juego con 1.253 puntos: jefes alfa, torres, mercaderes, filones,
   efigies, mazmorras… y las zonas de aparición reales de cada Pal, separadas por día y noche.
-- **Bases recomendadas** con el radio real de base (35 m) dibujado a escala y una ficha que explica por qué.
+- **Bases recomendadas** con el radio real de base (35 m) dibujado a escala. Al pulsar una chincheta se abre
+  una ficha sobre el propio mapa —que sigue a la chincheta al mover o acercar— con los nodos que caen dentro
+  del radio, por qué esa zona merece la pena, los filones que quedan justo fuera (distancia y rumbo) y cómo
+  aprovecharla.
 - **Los 288 Pals** con iconos, estadísticas, aptitudes, número de Paldex y coordenadas.
 - **Calculadora de cría** (padres → cría, y a la inversa).
 - **Buscador con `Ctrl` + `K`** (o `/`): escribe un nombre, un número de Paldex, un elemento o una habilidad
   y abre la **ficha completa del Pal** — habilidad de compañero con el texto oficial del juego, si se puede
-  montar y a qué velocidad, estadísticas con su percentil, aptitudes de trabajo, un minimapa con los puntos
-  donde aparece, las parejas de cría que lo dan y para qué equipos de la guía sirve. También se abre pulsando
+  montar y a qué velocidad, estadísticas con su percentil, aptitudes de trabajo, un minimapa interactivo
+  —se arrastra, se acerca con la rueda y se pellizca en el móvil— con los puntos donde aparece, las parejas
+  de cría que lo dan y para qué equipos de la guía sirve. También se abre pulsando
   cualquier icono o tarjeta de Pal de la página.
 
 ## What's inside
 
 Same as above, in English: six ready-made parties, a ~90-entry partner-skill catalogue, base rosters and
 foremen, all 114 passives with exact effects and implant costs, real catch probabilities, an interactive map
-of both game maps with 1,253 points and real spawn zones, recommended base spots with the true 35 m radius,
+of both game maps with 1,253 points and real spawn zones, recommended base spots with the true 35 m radius and an on-map card explaining each one,
 all 288 Pals, a breeding calculator, and a **`Ctrl` + `K` Pal search** that opens a full sheet for any Pal:
-partner skill, mount type and speed, stats, work levels, a minimap of its spawns, the breeding pairs that
+partner skill, mount type and speed, stats, work levels, an interactive minimap of its spawns, the breeding pairs that
 produce it, and what it is good for.
 
 ---
@@ -64,7 +68,7 @@ Como toda analítica de cliente, no cuenta a quien use un bloqueador de anuncios
 ## Estructura
 
 ```
-index.html                    la guía entera (~575 KB, ~130 KB comprimido)
+index.html                    la guía entera (~585 KB, ~132 KB comprimido)
 assets/map-palpagos.webp      mapa de Palpagos, 4096 px
 assets/map-worldtree.webp     mapa del Árbol del Mundo, 3072 px
 assets/pals-sprite.webp       los 288 iconos de Pal en un sprite

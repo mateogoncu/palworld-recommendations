@@ -275,23 +275,40 @@ td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;font-varian
 .mk.base .dot{width:12px;height:12px;background:#FFD166;border-color:#fff;
   box-shadow:0 0 0 1px rgba(0,0,0,.5),0 0 10px 2px rgba(255,209,102,.55)}
 .mk.base.sel .dot{background:#fff;box-shadow:0 0 0 2px #FFD166,0 0 16px 4px rgba(255,209,102,.8)}
-.basepanel{display:none;padding:16px 18px;background:var(--card);border-top:1px solid var(--line);
-  max-height:420px;overflow:auto}
-.basepanel.on{display:block}
-.basepanel h4{font-family:"Bricolage Grotesque",sans-serif;font-size:1.12rem;margin:0 0 2px;letter-spacing:-.02em}
-.bp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.bpop{position:absolute;left:0;top:0;z-index:60;width:min(340px,calc(100% - 18px));
+  max-height:min(80%,460px);overflow:auto;overscroll-behavior:contain;cursor:auto;
+  background:var(--card);border:1px solid var(--line-2);border-radius:13px;padding:13px 14px;
+  box-shadow:0 20px 44px rgba(0,0,0,.5);display:none;scrollbar-width:thin}
+.bpop.on{display:block}
+.bpop h4{font-family:"Bricolage Grotesque",sans-serif;font-size:1.05rem;margin:0 0 2px;letter-spacing:-.02em}
+.bp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.bp-btns{display:flex;gap:5px;flex:0 0 auto}
 .bp-close{border:1px solid var(--line);background:var(--bg);color:var(--ink-2);border-radius:7px;
-  padding:4px 10px;font:inherit;font-size:11.5px;cursor:pointer;flex:0 0 auto}
+  padding:4px 8px;font:inherit;font-size:11.5px;cursor:pointer;flex:0 0 auto;line-height:1.2}
 .bp-close:hover{color:var(--ink);border-color:var(--line-2)}
 .bp-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px}
-.bp-why{font-size:.9rem;color:var(--ink-2);line-height:1.6;max-width:78ch;margin-bottom:12px}
+.bp-near{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-2);
+  padding:3px 0;border-bottom:1px dashed var(--line)}
+.bp-near:last-child{border-bottom:0}
+.bp-near i{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.bp-near em{font-style:normal;font-family:"IBM Plex Mono",monospace;color:var(--ink-3);
+  margin-left:auto;font-size:10px;border:1px solid var(--line);border-radius:5px;
+  padding:1px 5px;min-width:2.6em;text-align:center}
+.bp-near b{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-weight:600;
+  min-width:6.2em;text-align:right;font-size:11px}
+.bp-tips{margin:0 0 12px;padding-left:15px;font-size:.83rem;color:var(--ink-2);line-height:1.55}
+.bp-tips li{margin-bottom:4px}
+.bp-why{font-size:.86rem;color:var(--ink-2);line-height:1.6;margin-bottom:12px}
 .bp-why b{color:var(--ink)}
 .bp-lab{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
 .bp-src{display:flex;flex-wrap:wrap;gap:8px;font-size:.83rem}
 .bp-src a{color:var(--accent-2);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent);
   padding-bottom:1px}
 .bp-src a:hover{border-bottom-color:var(--accent-2)}
-.bp-note{font-size:.78rem;color:var(--ink-3);margin-top:10px;font-style:italic}
+.bp-note{font-size:.75rem;color:var(--ink-3);margin-top:10px;font-style:italic}
+@media(max-width:640px){
+  .bpop{left:8px!important;right:8px;top:auto!important;bottom:8px;width:auto;max-height:58%}
+}
 
 /* ---------- buscador de pals ---------- */
 .dbtools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
@@ -411,10 +428,21 @@ kbd{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1;padding
 .psbtn.ghost{background:var(--card-2);color:var(--ink-2);border:1px solid var(--line-2)}
 .psbtn:hover{filter:brightness(1.06)}
 .mmap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;border-radius:10px;
-  border:1px solid var(--line-2);background:var(--map-ink)}
-.mmpan{position:absolute;left:50%;top:50%;aspect-ratio:1}
-.mmpan img{width:100%;height:100%;display:block;object-fit:cover}
-.mmk{position:absolute;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);
+  border:1px solid var(--line-2);background:var(--map-ink);cursor:grab;touch-action:none;
+  user-select:none;-webkit-user-select:none}
+.mmap.drag{cursor:grabbing}
+.mmpan{position:absolute;left:0;top:0;width:100%;aspect-ratio:1;transform-origin:0 0;will-change:transform}
+.mmpan img{width:100%;height:100%;display:block;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.mmz{position:absolute;right:6px;bottom:6px;display:flex;gap:4px;z-index:3}
+.mmz button{width:25px;height:25px;border-radius:7px;border:1px solid var(--line-2);
+  background:color-mix(in srgb,var(--card) 86%,transparent);color:var(--ink-2);cursor:pointer;
+  font:inherit;font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center}
+.mmz button:hover{color:var(--ink);border-color:var(--accent)}
+.mmhint{position:absolute;left:7px;top:7px;z-index:3;font-size:10px;color:var(--ink-2);
+  background:color-mix(in srgb,var(--card) 78%,transparent);border-radius:6px;padding:2px 6px;
+  pointer-events:none;transition:opacity .2s}
+.mmap.drag .mmhint,.mmap.moved .mmhint{opacity:0}
+.mmk{position:absolute;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%) scale(var(--iz,1));
   background:var(--mmc,#54C7D6);border:1.5px solid rgba(255,255,255,.9);
   box-shadow:0 0 0 1px rgba(0,0,0,.5),0 0 7px var(--mmc,#54C7D6)}
 .mmk.a{width:12px;height:12px;--mmc:#E4602F}
@@ -622,8 +650,8 @@ kbd{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1;padding
     <p class="sub" data-i18n="s6_sub">Busca un Pal por nombre y te marca sus zonas de aparición reales, separadas por día y noche.
     Las capas de abajo activan jefes alfa, torres, mercaderes y los filones de mineral, carbón, azufre y cuarzo
     — que es donde conviene plantar la base minera. Enciende <b>Bases recomendadas</b> y pulsa
-    cualquier círculo: el círculo es el radio real de una base (35 m) y la ficha te explica por qué
-    esa zona merece la pena. Rueda para acercar, arrastra para mover.</p>
+    cualquier chincheta amarilla: se abre una ficha ahí mismo con los nodos que caen dentro del radio real
+    (35 m), por qué esa zona merece la pena y cómo aprovecharla. Rueda para acercar, arrastra para mover.</p>
     <div class="mapwrap">
       <div class="maptools">
         <div class="mapswitch" id="mapswitch">
@@ -641,8 +669,8 @@ kbd{font-family:"IBM Plex Mono",monospace;font-size:10.5px;line-height:1;padding
           <img id="mapimg" alt="Mapa del mundo de Palworld">
           <div id="mklayer" style="position:absolute;inset:0"></div>
         </div>
+        <div class="bpop" id="bpop" role="dialog" aria-label="Base recomendada"></div>
       </div>
-      <div id="basepanel" class="basepanel"></div>
       <div class="mapbar">
         <span id="mapinfo" data-i18n="map_none">Ninguna búsqueda activa</span>
         <span class="coordout" id="coordout">—</span>
@@ -1506,7 +1534,7 @@ const STR_EN = {
  s5_hint:"Pick two parents to see the child, or pick a child to see which pairs produce it.",
 
  s6_h:"The map",
- s6_sub:"Search a Pal by name and it marks its real spawn zones, split by day and night. The layers below turn on alpha bosses, towers, merchants and the ore, coal, sulfur and quartz clusters — which is where you want to plant your mining base. Turn on <b>Recommended bases</b> and click any circle: the circle is a base's real radius (35 m) and the card explains why that spot is worth it. Scroll to zoom, drag to pan.",
+ s6_sub:"Search a Pal by name and it marks its real spawn zones, split by day and night. The layers below turn on alpha bosses, towers, merchants and the ore, coal, sulfur and quartz clusters — which is where you want to plant your mining base. Turn on <b>Recommended bases</b> and click any yellow pin: a card opens right there with the nodes inside the real base radius (35 m), why the spot is worth it and how to use it. Scroll to zoom, drag to pan.",
  map_tree:"World Tree", ph_map:"Search a Pal and see where it spawns…",
  map_none:"No active search",
 
@@ -1968,6 +1996,31 @@ const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>[...(r||document).query
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const PAL=window.__PAL, ico=window.__ico, dex=window.__dex;
 
+Object.assign(UI,{
+ whyGood:{es:"Por qué es buena",en:"Why it's good"},
+ bpNear:{es:"Otros filones cerca",en:"Other deposits nearby"},
+ bpTips:{es:"Cómo aprovecharla",en:"How to use it"},
+ bpZoom:{es:"Acercar",en:"Zoom"},
+ tp_smelt:{es:"Mineral y carbón en el mismo radio: pon aquí los hornos y no tendrás que mover material entre bases.",
+           en:"Ore and coal in the same radius: put your furnaces here and you'll never shuttle material between bases."},
+ tp_sulfur:{es:"Con azufre dentro puedes fabricar pólvora sin salir de la base.",
+            en:"With sulfur inside you can make gunpowder without leaving the base."},
+ tp_quartz:{es:"El cuarzo puro es el cuello de botella de circuitos y refinado; tenerlo en casa ahorra muchos viajes a la nieve.",
+            en:"Pure quartz is the bottleneck for circuits and refining; having it at home saves a lot of trips to the snow."},
+ tp_oil:{es:"El petróleo no se farmea de ninguna otra forma: monta la extractora aquí y lleva el crudo a la base principal.",
+         en:"Crude oil can't be farmed any other way: put the extractor here and haul the oil to your main base."},
+ tp_end:{es:"Material de final de partida: esta base tiene sentido a partir del nivel 50, no antes.",
+         en:"Endgame material: this base makes sense from level 50 on, not before."},
+ tp_terrain:{es:"No es una base de minería: vale por el terreno y la posición, así que úsala como criadero, granja o punto de defensa.",
+             en:"This isn't a mining base: it's worth it for the terrain and the position, so use it for breeding, farming or defence."},
+ tp_warpNear:{es:"El viaje rápido está a {d} unidades: entras, vacías los cofres y sales sin caminar.",
+              en:"Fast travel is {d} units away: warp in, empty the chests, warp out."},
+ tp_warpFar:{es:"El viaje rápido está a {d} unidades: ten una montura a mano o el mantenimiento se hace pesado.",
+             en:"Fast travel is {d} units away: keep a mount handy or the upkeep gets tedious."},
+ tp_highLv:{es:"Zona de nivel alto: ve con el equipo al día y con la resistencia climática que pida la región.",
+            en:"High-level zone: bring up-to-date gear and whatever climate resistance the region demands."}
+});
+
 const LAYERS=[
   {k:'Alpha Pal',c:'#E4602F', on:1},{k:'Tower',c:'#D24BAE', on:1},
   {k:'Ore Cluster',c:'#B9B39A', on:1},{k:'Coal Cluster',c:'#7E8A90', on:1},
@@ -1987,6 +2040,7 @@ const xy=(u,v,tf)=>({x:Math.round(u*tf.ty-tf.sy), y:Math.round((1-v)*tf.tx-tf.sx
 
 const stage=$('#stage'), pan=$('#pan'), img=$('#mapimg'), mk=$('#mklayer');
 let cur='p', s=1, px=0, py=0, on=new Set(LAYERS.filter(l=>l.on).map(l=>l.k));
+let bsel=null, dmoved=false;
 const poiBox={}, spawnBox={};
 
 for(const k in MAPS){
@@ -2063,6 +2117,7 @@ function apply(){
   pan.style.transform='translate('+px+'px,'+py+'px) scale('+s+')';
   pan.style.setProperty('--iz',(1/s).toFixed(4));
   pan.classList.toggle('zoomed', s>=2.2);
+  placePop();
 }
 function setMap(k){
   cur=k; img.src=MAPS[k].img;
@@ -2087,12 +2142,14 @@ $('#zrst').onclick=()=>{s=1;px=0;py=0;apply();};
 let drag=null;
 stage.addEventListener('pointerdown',e=>{
   if(e.target.closest('.mk')) return;
-  drag={x:e.clientX,y:e.clientY,px,py}; stage.classList.add('drag'); stage.setPointerCapture(e.pointerId);});
+  drag={x:e.clientX,y:e.clientY,px,py}; dmoved=false;
+  stage.classList.add('drag'); stage.setPointerCapture(e.pointerId);});
 stage.addEventListener('pointermove',e=>{
   const r=stage.getBoundingClientRect(), W=stage.clientWidth;
   const u=(e.clientX-r.left-px)/(W*s), v=(e.clientY-r.top-py)/(W*s);
   if(u>=0&&u<=1&&v>=0&&v<=1){const c=xy(u,v,MAPS[cur].tf); $('#coordout').textContent=c.x+', '+c.y;}
   if(!drag) return;
+  if(Math.abs(e.clientX-drag.x)>4||Math.abs(e.clientY-drag.y)>4) dmoved=true;
   px=drag.px+(e.clientX-drag.x); py=drag.py+(e.clientY-drag.y); apply();});
 ['pointerup','pointercancel','pointerleave'].forEach(ev=>stage.addEventListener(ev,()=>{drag=null;stage.classList.remove('drag');}));
 addEventListener('resize',apply);
@@ -2157,8 +2214,14 @@ document.addEventListener('click',e=>{
   document.getElementById('mapa').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
-/* ---------- panel de bases recomendadas ---------- */
-const bp=$('#basepanel');
+/* ---------- ficha flotante de bases recomendadas ---------- */
+const bp=$('#bpop');
+const CLUS={'Ore Cluster':['Ore','#B9B39A'],'Coal Cluster':['Coal','#7E8A90'],
+  'Sulfur Cluster':['Sulfur','#E8C33B'],'Pure Quartz Cluster':['Pure Quartz','#8FD9EA'],
+  'Paloxite':['Paloxite','#DFA3FF']};
+const DIRS={es:['N','NE','E','SE','S','SO','O','NO'],en:['N','NE','E','SE','S','SW','W','NW']};
+const bearing=(dx,dy)=>DIRS[LANG][Math.round(((Math.atan2(dx,dy)*180/Math.PI+360)%360)/45)%8];
+const baseR=m=>3500/(m==='p'?459:1335.14);
 function baseLabels(){
   $$('.mk.base',mk).forEach(e=>{
     const [m,i]=e.dataset.base.split('_');
@@ -2167,35 +2230,102 @@ function baseLabels(){
     if(lab) lab.textContent=T(b.n)+' · '+b.x+', '+b.y;
   });
 }
+/* filones que quedan fuera del radio pero a tiro de caminata */
+function nearClusters(b){
+  const r=baseR(b.m);
+  return B.poi.filter(o=>o.m===b.m&&CLUS[o.t])
+    .map(o=>({t:o.t,dx:o.x-b.x,dy:o.y-b.y,d:Math.hypot(o.x-b.x,o.y-b.y)}))
+    .filter(o=>o.d>r&&o.d<=r*15).sort((a,c)=>a.d-c.d).slice(0,5);
+}
+/* consejos derivados de los propios datos de la base */
+function baseTips(b){
+  const n=b.nodes||{}, t=[], has=k=>(n[k]||0)>0;
+  if(has('Ore')&&has('Coal')) t.push(U('tp_smelt'));
+  if(has('Sulfur')) t.push(U('tp_sulfur'));
+  if(has('Pure Quartz')) t.push(U('tp_quartz'));
+  if(has('Crude Oil')) t.push(U('tp_oil'));
+  if(has('Soralite')||has('Paloxite')) t.push(U('tp_end'));
+  if(!Object.keys(n).length) t.push(U('tp_terrain'));
+  if(b.ft&&b.ft.d<=30) t.push(U('tp_warpNear').replace('{d}',b.ft.d));
+  else if(b.ft&&b.ft.d>=90) t.push(U('tp_warpFar').replace('{d}',b.ft.d));
+  const lv=(b.lv||'').match(/(\d+)/);
+  if(lv&&+lv[1]>=30) t.push(U('tp_highLv'));
+  return t;
+}
 function showBase(m,i){
   const b=BASES.filter(x=>x.m===m)[+i]; if(!b) return;
+  if(m!==cur) setMap(m);
   $$('.mk.base',mk).forEach(e=>e.classList.toggle('sel', e.dataset.base===m+'_'+i));
   const nodes=Object.entries(b.nodes||{});
-  const total=nodes.reduce((s,[,v])=>s+v,0);
+  const total=nodes.reduce((a,[,v])=>a+v,0);
+  const near=nearClusters(b), tips=baseTips(b);
   const yt='https://www.youtube.com/results?search_query='+encodeURIComponent('Palworld base '+b.n.en+' '+b.x+' '+b.y);
-  bp.innerHTML='<div class="bp-top"><div><h4>'+esc(T(b.n))+'</h4>'+
-    '<div class="mono" style="font-size:12px;color:var(--ink-3)">'+b.x+', '+b.y+' · '+esc(b.lv||'')+
+  bp.innerHTML='<div class="bp-top"><div style="min-width:0"><h4>'+esc(T(b.n))+'</h4>'+
+    '<div class="mono" style="font-size:11.5px;color:var(--ink-3)">'+b.x+', '+b.y+' · '+esc(b.lv||'')+
     (b.m==='t'?' · '+U('tree'):'')+'</div></div>'+
-    '<button class="bp-close">'+U('closePanel')+'</button></div>'+
+    '<div class="bp-btns"><button class="bp-close bp-zoom" title="'+U('bpZoom')+'">+</button>'+
+    '<button class="bp-close bp-x" title="'+U('closePanel')+'">✕</button></div></div>'+
     '<div class="bp-meta"><span class="pv">'+esc(T(b.tag))+'</span><span class="wk">'+U('baseRadius')+'</span>'+
     (b.ft?'<span class="wk">'+U('fastTravel')+': '+esc(b.ft.n)+' · '+b.ft.d+' '+U('units')+'</span>':'')+'</div>'+
     '<div class="bp-lab">'+U('inRadius')+(total?' · '+total:'')+'</div>'+
     '<div class="bp-meta">'+(nodes.length?nodes.sort((a,c)=>c[1]-a[1]).map(([k,v])=>
       '<span class="wk">'+esc(RES_L[LANG][k]||k)+' <b>'+v+'</b></span>').join('')
       :'<span style="font-size:.85rem;color:var(--ink-3)">'+U('noNodes')+'</span>')+'</div>'+
+    '<div class="bp-lab">'+U('whyGood')+'</div>'+
     '<div class="bp-why">'+T(b.why)+'</div>'+
+    (near.length?'<div class="bp-lab">'+U('bpNear')+'</div><div style="margin-bottom:12px">'+
+      near.map(o=>'<div class="bp-near"><i style="background:'+CLUS[o.t][1]+'"></i>'+
+        '<span>'+esc(RES_L[LANG][CLUS[o.t][0]]||CLUS[o.t][0])+'</span>'+
+        '<em>'+bearing(o.dx,o.dy)+'</em><b>'+Math.round(o.d)+' '+U('units')+'</b></div>').join('')+
+      '</div>':'')+
+    (tips.length?'<div class="bp-lab">'+U('bpTips')+'</div><ul class="bp-tips">'+
+      tips.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+
     '<div class="bp-lab">'+U('sources')+'</div>'+
     '<div class="bp-src">'+(b.src||[]).map(x=>'<a href="'+x.u+'" target="_blank" rel="noopener">'+esc(x.t)+' ↗</a>').join('')+
     '<a href="'+yt+'" target="_blank" rel="noopener">'+U('videoSearch')+' ↗</a>'+
     '<a href="https://palworld.wiki.gg/wiki/Base" target="_blank" rel="noopener">palworld.wiki.gg · Base ↗</a></div>'+
     '<div class="bp-note">'+U('computed')+'</div>';
-  bp.classList.add('on');
-  bp.querySelector('.bp-close').onclick=()=>{bp.classList.remove('on');
-    $$('.mk.base',mk).forEach(e=>e.classList.remove('sel'));};
+  const c=uv(b.x,b.y,MAPS[m].tf);
+  bsel={m:m,i:+i,u:c.u,v:c.v};
+  bp.classList.add('on'); bp.scrollTop=0; placePop();
 }
+function closeBase(){
+  bsel=null; bp.classList.remove('on');
+  $$('.mk.base',mk).forEach(e=>e.classList.remove('sel'));
+}
+/* la ficha sigue a su chincheta mientras mueves o acercas el mapa */
+function placePop(){
+  if(!bsel) return;
+  if(bsel.m!==cur){bp.classList.remove('on'); return;}
+  bp.classList.add('on');
+  const W=stage.clientWidth, H=stage.clientHeight;
+  const x=px+bsel.u*W*s, y=py+bsel.v*W*s;
+  const w=bp.offsetWidth, h=bp.offsetHeight;
+  let L=x+20;
+  if(L+w>W-8) L=x-20-w;
+  bp.style.left=Math.max(8,Math.min(W-w-8,L))+'px';
+  bp.style.top=Math.max(8,Math.min(H-h-8,y-h/2))+'px';
+}
+bp.addEventListener('click',e=>{
+  if(e.target.closest('.bp-x')){closeBase(); return;}
+  if(e.target.closest('.bp-zoom')&&bsel){
+    const W=stage.clientWidth, H=stage.clientHeight;
+    s=Math.max(s*1.6,5); px=W/2-bsel.u*W*s; py=H/2-bsel.v*W*s; apply();
+  }
+});
+bp.addEventListener('pointerdown',e=>e.stopPropagation());
+bp.addEventListener('wheel',e=>e.stopPropagation(),{passive:true});
 mk.addEventListener('click',e=>{
   const b=e.target.closest('.mk.base'); if(!b) return;
   const [m,i]=b.dataset.base.split('_'); showBase(m,i);
+});
+stage.addEventListener('click',e=>{
+  if(dmoved||!bsel) return;
+  if(e.target.closest('.mk.base')||e.target.closest('#bpop')) return;
+  closeBase();
+});
+addEventListener('keydown',e=>{
+  if((e.key||'')==='Escape'&&bsel&&!document.querySelector('.ovl.on')) closeBase();
 });
 baseLabels();
 
@@ -2308,7 +2438,7 @@ function setLang(l){
   applyStatic();
   window.__renderAll();
   drawLayers(); db(); fwd(); rev(); baseLabels();
-  if(bp.classList.contains('on')) bp.classList.remove('on');
+  if(bsel) showBase(bsel.m,bsel.i);
   $('#mapinfo').textContent=U('noSearch');
 }
 $('#langsw').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setLang(b.dataset.lang);});
@@ -2568,6 +2698,13 @@ function mountBlock(x){
   }).join('');
 }
 
+Object.assign(UI,{
+ mm_hint:{es:"Arrastra para mover · rueda para acercar",en:"Drag to pan · scroll to zoom"},
+ mm_in:{es:"Acercar",en:"Zoom in"},
+ mm_out:{es:"Alejar",en:"Zoom out"},
+ mm_rst:{es:"Volver a la vista inicial",en:"Reset the view"}
+});
+
 function locsOf(p){
   const m=new Map();
   const add=(x,y,mm,zone,flag,lv)=>{
@@ -2592,25 +2729,90 @@ function miniMap(L){
   const mm=cnt.t>cnt.p?'t':'p';
   const pts=L.filter(e=>e.m===mm);
   const tf=MAPS[mm].tf;
-  const uvs=pts.map(e=>{const c=uv(e.x,e.y,tf); return {u:c.u,v:c.v,k:locKind(e)};});
+  const uvs=pts.map(e=>{const c=uv(e.x,e.y,tf);
+    return {u:c.u,v:c.v,k:locKind(e),x:e.x,y:e.y,lv:e.lv,zone:e.zone};});
   const uMin=Math.min.apply(null,uvs.map(o=>o.u)), uMax=Math.max.apply(null,uvs.map(o=>o.u));
   const vMin=Math.min.apply(null,uvs.map(o=>o.v)), vMax=Math.max.apply(null,uvs.map(o=>o.v));
   const span=Math.max(uMax-uMin,(vMax-vMin)/0.75,0.035);
   const Z=Math.max(1,Math.min(9,0.78/span));
-  let cu=(uMin+uMax)/2, cv=(vMin+vMax)/2;
-  const hu=0.5/Z, hv=0.375/Z;
-  cu=hu*2>=1?0.5:Math.min(Math.max(cu,hu),1-hu);
-  cv=hv*2>=1?0.5:Math.min(Math.max(cv,hv),1-hv);
+  const cu=(uMin+uMax)/2, cv=(vMin+vMax)/2;
   const kinds=[...new Set(uvs.map(o=>o.k))];
-  return '<div class="mmap"><div class="mmpan" style="width:'+(Z*100).toFixed(2)+'%;'+
-    'transform:translate(-'+(cu*100).toFixed(3)+'%,-'+(cv*100).toFixed(3)+'%)">'+
-    '<img src="'+MAPS[mm].img+'" alt="">'+
+  return '<div class="mmap" data-z="'+Z.toFixed(4)+'" data-cu="'+cu.toFixed(5)+'" data-cv="'+cv.toFixed(5)+'">'+
+    '<div class="mmpan"><img src="'+MAPS[mm].img+'" alt="" draggable="false">'+
     uvs.map(o=>'<span class="mmk'+(o.k==='a'||o.k==='t'?' a':'')+'" style="left:'+(o.u*100).toFixed(3)+
-      '%;top:'+(o.v*100).toFixed(3)+'%;--mmc:'+KINDC[o.k]+'"></span>').join('')+
-    '</div></div>'+
+      '%;top:'+(o.v*100).toFixed(3)+'%;--mmc:'+KINDC[o.k]+'" title="'+
+      esc(kindLbl(o.k)+(o.lv?' Lv'+o.lv:'')+(o.zone?' · '+o.zone:'')+' · '+o.x+', '+o.y)+'"></span>').join('')+
+    '</div>'+
+    '<div class="mmhint">'+U('mm_hint')+'</div>'+
+    '<div class="mmz"><button type="button" data-mz="in" title="'+U('mm_in')+'">+</button>'+
+    '<button type="button" data-mz="out" title="'+U('mm_out')+'">\u2212</button>'+
+    '<button type="button" data-mz="rst" title="'+U('mm_rst')+'">\u27f2</button></div></div>'+
     '<div class="mmcap">'+kinds.map(k=>'<span><em style="--mmc:'+KINDC[k]+'"></em>'+kindLbl(k)+'</span>').join('')+
     '<span style="margin-left:auto">'+(mm==='t'?U('lo_tree'):U('lo_palp'))+'</span></div>';
 }
+/* el minimapa de la ficha se mueve y se acerca como el mapa grande */
+function wireMini(root){
+  const map=root.querySelector('.mmap'); if(!map) return;
+  const pan=map.querySelector('.mmpan');
+  const Z=+map.dataset.z, cu=+map.dataset.cu, cv=+map.dataset.cv;
+  let sc=Z, mx=0, my=0;
+  function apply(){
+    const w=map.clientWidth, h=map.clientHeight;
+    mx=Math.min(0,Math.max(w-w*sc,mx));
+    my=Math.min(0,Math.max(h-w*sc,my));
+    pan.style.transform='translate('+mx.toFixed(2)+'px,'+my.toFixed(2)+'px) scale('+sc.toFixed(4)+')';
+    pan.style.setProperty('--iz',(1/sc).toFixed(4));
+  }
+  function fit(){
+    const w=map.clientWidth, h=map.clientHeight;
+    sc=Z; mx=w/2-cu*w*sc; my=h/2-cv*w*sc; apply();
+    map.classList.remove('moved');
+  }
+  function zoom(f,ax,ay){
+    const ns=Math.min(14,Math.max(1,sc*f)); if(ns===sc) return;
+    const w=map.clientWidth, h=map.clientHeight;
+    ax=ax==null?w/2:ax; ay=ay==null?h/2:ay;
+    mx=ax-(ax-mx)*(ns/sc); my=ay-(ay-my)*(ns/sc); sc=ns; apply();
+    map.classList.add('moved');
+  }
+  map.__fit=fit; map.__ap=apply;
+  map.addEventListener('wheel',e=>{
+    e.preventDefault(); e.stopPropagation();
+    const r=map.getBoundingClientRect();
+    zoom(e.deltaY<0?1.25:1/1.25, e.clientX-r.left, e.clientY-r.top);},{passive:false});
+  const pts=new Map(); let pinch=0;
+  map.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.mmz')) return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    try{map.setPointerCapture(e.pointerId);}catch(err){}
+    map.classList.add('drag'); pinch=0;});
+  map.addEventListener('pointermove',e=>{
+    const prev=pts.get(e.pointerId); if(!prev) return;
+    pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===1){
+      mx+=e.clientX-prev.x; my+=e.clientY-prev.y; apply(); map.classList.add('moved');
+    } else if(pts.size===2){
+      const a=[...pts.values()], d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
+      if(pinch){const r=map.getBoundingClientRect();
+        zoom(d/pinch,(a[0].x+a[1].x)/2-r.left,(a[0].y+a[1].y)/2-r.top);}
+      pinch=d;
+    }});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>map.addEventListener(ev,e=>{
+    pts.delete(e.pointerId); if(pts.size<2) pinch=0;
+    if(!pts.size) map.classList.remove('drag');}));
+  map.addEventListener('dblclick',e=>{
+    e.preventDefault();
+    const r=map.getBoundingClientRect(); zoom(1.7,e.clientX-r.left,e.clientY-r.top);});
+  map.addEventListener('click',e=>{
+    const b=e.target.closest('[data-mz]'); if(!b) return;
+    e.stopPropagation();
+    if(b.dataset.mz==='in') zoom(1.5);
+    else if(b.dataset.mz==='out') zoom(1/1.5);
+    else fit();});
+  fit();
+}
+addEventListener('resize',()=>{const m=box.querySelector('.mmap'); if(m&&m.__ap) m.__ap();});
+
 function whereBlock(p){
   const L=locsOf(p);
   if(!L.length) return '<div class="psnote" style="margin:0">'+U('lo_none')+'</div>';
@@ -2723,6 +2925,7 @@ function showSheet(name,fromPalette){
   ov.classList.remove('on');
   sheet.classList.add('on'); document.body.style.overflow='hidden';
   box.scrollTop=0;
+  wireMini(box);
   const c=box.querySelector('.psclose'); if(c) c.focus();
 }
 window.__showSheet=showSheet;
