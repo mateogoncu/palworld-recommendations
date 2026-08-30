@@ -22,31 +22,38 @@ A **Palworld** guide in Spanish and English, built from the game's own data.
   una ficha sobre el propio mapa —que sigue a la chincheta al mover o acercar— con los nodos que caen dentro
   del radio, por qué esa zona merece la pena, los filones que quedan justo fuera (distancia y rumbo) y cómo
   aprovecharla.
+- **Un apartado propio de ubicaciones de base**: los dieciséis sitios en fichas, filtrables por recurso, cada
+  uno con sus nodos, su nivel de zona, el porqué, los filones que quedan cerca y un botón que lo abre marcado
+  en el mapa.
 - **Los 288 Pals** con iconos, estadísticas, aptitudes, número de Paldex y coordenadas.
 - **Calculadora de cría** (padres → cría, y a la inversa).
 - **Buscador con `Ctrl` + `K`** (o `/`): escribe un nombre, un número de Paldex, un elemento o una habilidad
   y abre la **ficha completa del Pal** — habilidad de compañero con el texto oficial del juego, si se puede
   montar y a qué velocidad, estadísticas con su percentil, aptitudes de trabajo, un minimapa interactivo
-  —se arrastra, se acerca con la rueda y se pellizca en el móvil— con los puntos donde aparece, las parejas
-  de cría que lo dan y para qué equipos de la guía sirve. También se abre pulsando
-  cualquier icono o tarjeta de Pal de la página.
+  —se arrastra, se acerca con la rueda y se pellizca en el móvil— con los puntos donde aparece, el nivel al
+  que sale en libertad (en la cabecera y en cada punto), las parejas de cría que lo dan y para qué equipos de
+  la guía sirve. También se abre pulsando cualquier icono o tarjeta de Pal de la página.
+- En la **calculadora de cría**, pulsar una pareja abre una minificha con los dos padres lado a lado —icono,
+  número de Paldex, elementos, nivel en libertad, mejores aptitudes y dónde aparece cada uno— y un acceso
+  directo a la ficha completa de cualquiera de los dos.
 
 ## What's inside
 
 Same as above, in English: six ready-made parties, a ~90-entry partner-skill catalogue, base rosters and
 foremen, all 114 passives with exact effects and implant costs, real catch probabilities, an interactive map
-of both game maps with 1,253 points and real spawn zones, recommended base spots with the true 35 m radius and an on-map card explaining each one,
-all 288 Pals, a breeding calculator, and a **`Ctrl` + `K` Pal search** that opens a full sheet for any Pal:
-partner skill, mount type and speed, stats, work levels, an interactive minimap of its spawns, the breeding pairs that
-produce it, and what it is good for.
+of both game maps with 1,253 points and real spawn zones, recommended base spots with the true 35 m radius, an on-map card explaining each one and a section of their
+own listing all sixteen, all 288 Pals, a breeding calculator whose pairs open a side-by-side mini sheet of both
+parents, and a **`Ctrl` + `K` Pal search** that opens a full sheet for any Pal: partner skill, mount type and
+speed, stats, work levels, an interactive minimap of its spawns, the level it spawns at in the wild, the
+breeding pairs that produce it, and what it is good for.
 
 ---
 
 ## De dónde salen los datos
 
 Los datos de Pals, aptitudes de trabajo, estadísticas, pasivas, habilidades de compañero (texto oficial del
-juego en los dos idiomas), tipo y velocidad de montura, coordenadas de aparición, nodos de recurso y
-probabilidades de captura se extrajeron de la base de datos comunitaria
+juego en los dos idiomas), tipo y velocidad de montura, coordenadas y **nivel** de aparición, nodos de recurso
+y probabilidades de captura se extrajeron de la base de datos comunitaria
 **[paldb.cc](https://paldb.cc)**, que a su vez extrae los archivos del juego. Versión de datos: **v1.0.3 (12 ago 2026)**.
 
 Las **bases recomendadas** no están copiadas de ninguna guía: se calcularon buscando, sobre las coordenadas de
@@ -68,7 +75,7 @@ Como toda analítica de cliente, no cuenta a quien use un bloqueador de anuncios
 ## Estructura
 
 ```
-index.html                    la guía entera (~585 KB, ~132 KB comprimido)
+index.html                    la guía entera (~610 KB, ~139 KB comprimido)
 assets/map-palpagos.webp      mapa de Palpagos, 4096 px
 assets/map-worldtree.webp     mapa del Árbol del Mundo, 3072 px
 assets/pals-sprite.webp       los 288 iconos de Pal en un sprite
