@@ -25,6 +25,11 @@ A **Palworld** guide in Spanish and English, built from the game's own data.
 - **Un apartado propio de ubicaciones de base**: los dieciséis sitios en fichas, filtrables por recurso, cada
   uno con sus nodos, su nivel de zona, el porqué, los filones que quedan cerca y un botón que lo abre marcado
   en el mapa.
+- **Jefes de torre**: los trece jefes (las nueve torres, Panthalus y los tres jefes del Árbol del Mundo) en fichas
+  con el Pal contra el que peleas, su nivel y vida, sus ataques más fuertes, a qué es débil y qué resiste, qué
+  elementos no llevar, y qué Pals recomendados llevar — a tu nivel y para más adelante — con su «pega ×2 · recibe ×½»
+  calculado sobre los ataques reales del jefe y los Pals que potencian ese elemento desde la party. Cada ficha trae
+  su **modo difícil** (qué ataques nuevos aprende y cómo cambia el counter) y un botón que la abre en el mapa.
 - **Los 288 Pals** con iconos, estadísticas, aptitudes, número de Paldex y coordenadas.
 - **Calculadora de cría** (padres → cría, y a la inversa).
 - **Buscador con `Ctrl` + `K`** (o `/`): escribe un nombre, un número de Paldex, un elemento o una habilidad
@@ -42,7 +47,7 @@ A **Palworld** guide in Spanish and English, built from the game's own data.
 Same as above, in English: six ready-made parties, a ~90-entry partner-skill catalogue, base rosters and
 foremen, all 114 passives with exact effects and implant costs, real catch probabilities, an interactive map
 of both game maps with 1,253 points and real spawn zones, recommended base spots with the true 35 m radius, an on-map card explaining each one and a section of their
-own listing all sixteen, all 288 Pals, a breeding calculator whose pairs open a side-by-side mini sheet of both
+own listing all sixteen, a tower-boss section (all thirteen bosses with their Pal, weaknesses, what not to bring, recommended Pals with computed damage multipliers, party boosters and what changes on hard mode), all 288 Pals, a breeding calculator whose pairs open a side-by-side mini sheet of both
 parents, and a **`Ctrl` + `K` Pal search** that opens a full sheet for any Pal: partner skill, mount type and
 speed, stats, work levels, an interactive minimap of its spawns, the level it spawns at in the wild, the
 breeding pairs that produce it, and what it is good for.
@@ -55,6 +60,13 @@ Los datos de Pals, aptitudes de trabajo, estadísticas, pasivas, habilidades de 
 juego en los dos idiomas), tipo y velocidad de montura, coordenadas y **nivel** de aparición, nodos de recurso
 y probabilidades de captura se extrajeron de la base de datos comunitaria
 **[paldb.cc](https://paldb.cc)**, que a su vez extrae los archivos del juego. Versión de datos: **v1.0.3 (12 ago 2026)**.
+
+Los **jefes de torre** (nivel, vida, multiplicadores de daño, ataques y botín, en normal y en difícil) salen de
+[la página de torres de paldb.cc](https://paldb.cc/en/Tower), versión **v1.0.5**; con esos datos se corrigieron
+también los niveles de las torres de Axel (30) y Marcus (40) en el mapa. Las debilidades y los «pega / recibe» se
+calculan con la tabla de elementos del juego. Los pocos datos que no salen de los archivos (límite de cinco
+minutos, acceso a la torre de Auri, requisitos del jefe final) están marcados en la ficha como «según las guías de
+la 1.0».
 
 Las **bases recomendadas** no están copiadas de ninguna guía: se calcularon buscando, sobre las coordenadas de
 los 4.136 nodos de recurso del juego, el centro de círculo de 35 m que cubre más nodos. El resultado se
